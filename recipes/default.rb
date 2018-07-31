@@ -61,7 +61,7 @@ package "unzip" do
   action :install
 end
 
-cookbook_file '/tmp/sapcc-2.11.1-linux-x64.zip' do
+remote_file '/tmp/sapcc-2.11.1-linux-x64.zip' do
   source 'https://s3.amazonaws.com/cl-nvs-tec-tests/sapcc-2.11.1-linux-x64.zip'
   owner 'root'
   group 'root'
