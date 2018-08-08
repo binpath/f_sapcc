@@ -14,7 +14,7 @@ end
 # sapjvm_8-1.035-1.x86_64
 describe package("sapjvm_8") do
 	it { is_expected.to be_installed }
-	its('version') { should eq '1.035-1' }
+	its('version') { should eq '1.039-1' }
 end
 
 describe file('/usr/java/sapjvm_8_latest/') do
@@ -28,7 +28,7 @@ describe file('/usr/bin/java') do
 end
 
 describe command("awk '/MemTotal/ {print $2}' /proc/meminfo") do
-  its('stdout.strip.to_i') { should be >= 4042012 }
+  its('stdout.strip.to_i') { should be >= 4042004 }
   its('stderr') { should eq '' }
   its('exit_status') { should eq 0 }
 end
@@ -45,4 +45,29 @@ end
 describe port(8443) do
   it { should be_listening }
   its('protocols') { should cmp 'tcp' }
+end
+
+
+control 'Firewall' do
+  impact 1.0
+  title 'Servicio Firewall'
+  desc 'Servicio Firewall'
+
+  describe service('firewalld') do
+    it { should_not be_enabled }
+    it { should_not be_running }
+  end
+
+  # describe file('/etc/sysctl.conf') do
+  #   it { should exist }
+  #   it { should be_file }
+  #   it { should be_owned_by 'root' }
+  #   its('content') { should match /net.ipv6.conf.all.disable_ipv6=1/ }
+  # end
+
+  describe command('sysctl -a | grep net.ipv6.conf.all.disable_ipv6') do
+    its('stdout') { should match /net.ipv6.conf.all.disable_ipv6 = 1/ }
+    its('exit_status') { should eq 0 }
+  end
+
 end

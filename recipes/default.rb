@@ -30,6 +30,16 @@ end
 #   mode '0644'
 # end
 
+sysctl 'net.ipv6.conf.all.disable_ipv6' do
+  value '1'
+  action :apply
+end
+
+service 'firewalld' do
+  action [:stop, :disable]
+end
+
+
 # Download sap jvm
 remote_file '/tmp/sapjvm-8.1.035-linux-x64.rpm' do
   owner 'root'
