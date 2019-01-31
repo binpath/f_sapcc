@@ -14,7 +14,7 @@ end
 # sapjvm_8-1.035-1.x86_64
 describe package("sapjvm_8") do
 	it { is_expected.to be_installed }
-	its('version') { should eq '1.035-1' }
+	its('version') { should eq '1.039-1' }
 end
 
 describe file('/usr/java/sapjvm_8_latest/') do
