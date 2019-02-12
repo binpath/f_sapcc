@@ -32,6 +32,7 @@ platforms:
       forward:
       - 8443:8443
       privileged: true
+      run_options: --add-host "devfiori.cyt.conchaytoro.cl:172.16.65.27"
 
 suites:
   - name: default
