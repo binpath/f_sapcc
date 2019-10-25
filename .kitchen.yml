@@ -44,7 +44,9 @@ platforms:
 
 suites:
   - name: default
+    run_list:
+      - recipe[f_sapcc::default]
     verifier:
       inspec_tests:
-        - test/integration/default
+        - test/smoke/default
     attributes:
