@@ -40,7 +40,7 @@ platforms:
           delete_on_termination: true
     transport:
       username: centos
-      ssh_key: /Users/binpath/devops/kp/automation-rpa-virginia.pem 
+      ssh_key: /Users/cfelce/devops/kp/automation-rpa-virginia.pem 
 
 suites:
   - name: default

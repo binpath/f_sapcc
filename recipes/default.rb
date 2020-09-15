@@ -61,22 +61,30 @@ package "unzip" do
   action :install
 end
 
-remote_file '/tmp/sapcc-2.11.1-linux-x64.zip' do
-  source 'https://s3.amazonaws.com/cl-nvs-tec-tests/sapcc-2.11.1-linux-x64.zip'
-  owner 'root'
-  group 'root'
-  mode '0644'
+# remote_file '/tmp/sapcc-2.11.1-linux-x64.zip' do
+#   source 'https://s3.amazonaws.com/cl-nvs-tec-tests/sapcc-2.11.1-linux-x64.zip'
+#   owner 'root'
+#   group 'root'
+#   mode '0644'
+# end
+
+aws_s3_file '/tmp/sapcc-2.12.4-linux-x64.zip' do
+  bucket 'ns-sap-repo'
+  remote_path 'linux_x86_64/sapcc-2.12.4-linux-x64.zip'
+  region 'us-east-1'
+  not_if { ::File.exist?('/tmp/sapcc-2.12.4-linux-x64.zip') }
 end
 
+
 execute 'unzip-sapcc' do
-  command 'unzip /tmp/sapcc-2.11.1-linux-x64.zip -d /opt/sapcc'
+  command 'unzip /tmp/sapcc-2.12.4-linux-x64.zip -d /opt/sapcc'
   action :run
   not_if { ::File.exist?('/opt/sapcc') }
   notifies :install, "package[com.sap.scc-ui]", :immediately
 end
 
 package 'com.sap.scc-ui' do
-  source '/opt/sapcc/com.sap.scc-ui-2.11.1-2.x86_64.rpm'
+  source '/opt/sapcc/com.sap.scc-ui-2.12.4-4.x86_64.rpm'
   action :nothing
   # notifies :run, "bash[update-alternatives java]", :immediately
 end
