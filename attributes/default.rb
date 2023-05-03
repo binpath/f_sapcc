@@ -1,1 +1,1 @@
-default["sapjvm"]["version"] = '8.1.035'
+default["sapjvm"]["version"] = '8.1.092'
