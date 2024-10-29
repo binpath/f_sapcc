@@ -28,7 +28,7 @@ suites:
   - name: default
     driver:
       ports:
-      - '8443'
+      - 8443:8443
     run_list:
       - recipe[f_sapcc::default]
     verifier:

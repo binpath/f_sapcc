@@ -85,6 +85,11 @@ execute 'tar-sapcc' do
   # notifies :install, "package[com.sap.scc-ui]", :immediately
 end
 
+# execute "start cloud connectot" do
+#   cwd '/opt/sapcc'
+#   command "JAVA_HOME='/opt/sapjvm/sapjvm_8' ./go.sh"
+# end
+
 # execute 'daemon-install-sapcc' do
 #   cwd '/opt/sapcc/'
 #   command "go.sh reinstallSystemd"
